@@ -6,8 +6,9 @@ import { ControlesModule } from './controles/controles.module';
 import { InactividadesModule } from './inactividades/inactividades.module';
 import { WixModule } from './wix/wix.module';
 import { AuthModule } from './auth/auth.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
-  imports: [ObrasModule, UsuariosModule, PedidosModule, ControlesModule, InactividadesModule, WixModule, AuthModule],
+  imports: [ObrasModule, UsuariosModule, PedidosModule, ControlesModule, InactividadesModule, WixModule, AuthModule, FilesModule],
 })
 export class AppModule {}

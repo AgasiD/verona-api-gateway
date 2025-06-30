@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Inject, Logger, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, HttpException, HttpStatus, Inject, Logger, Param, Post, Put } from '@nestjs/common';
 import { PedidosService } from './pedidos.service';
 import { NATS_SERVICE } from 'src/config/services';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { handleHttpErrors } from 'src/common/exceptions/http-expeptions';
 
 @Controller('pedidos')
 export class PedidosController {
@@ -20,7 +21,7 @@ export class PedidosController {
 
         } catch (err) {
             this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 
@@ -32,7 +33,7 @@ export class PedidosController {
 
         } catch (err) {
             this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 
@@ -45,7 +46,7 @@ export class PedidosController {
 
         } catch (err) {
             this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 
@@ -56,8 +57,7 @@ export class PedidosController {
             return await firstValueFrom(this.client.send('pedidos.agregarPedido', { pedido }))
 
         } catch (err) {
-            this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 
@@ -68,7 +68,7 @@ export class PedidosController {
             return await firstValueFrom(this.client.send('obras.cerrarPedido', { pedidoId }))
         } catch (err) {
             this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 
@@ -81,7 +81,7 @@ export class PedidosController {
 
         } catch (err) {
             this.logger.error(err)
-            throw err
+            handleHttpErrors(err)
         }
     }
 }

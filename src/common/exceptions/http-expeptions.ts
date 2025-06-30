@@ -2,21 +2,20 @@ import { GatewayTimeoutException, HttpException, InternalServerErrorException, N
 
 export const handleHttpErrors = (error) => {
 
+
     if (error.message && error.message === 'Timeout has occurred') {
         throw new GatewayTimeoutException('El microservicio no respondió a tiempo');
     }
 
-    switch (error.status) {
-        case 500:
-            throw new InternalServerErrorException(error.message ?? 'Error')
-            break;
-        case 404:
-            throw new NotFoundException(error.message ?? 'Error')
-            break;
-            
-        default:
-            throw new HttpException(error.message ?? 'Error', error.status);
+    let exception_info;
+    let custom_error = error;
+    if (error.error && error.error.status) {
+        custom_error = error.error;
     }
+    exception_info = { status: custom_error.status, message: custom_error.message }
+
+
+    throw new HttpException(exception_info.message ?? 'Error', exception_info.status);
 
 
 

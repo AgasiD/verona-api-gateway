@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Inject, Logger, } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Inject, Logger, HttpException, } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { MyResponse } from 'src/common/entities/entities/httpResponse.entity';
 import { NATS_SERVICE } from 'src/config/services';
 import { CreateInactividadDTO } from './dto/create-inactividad.dto';
+import { handleHttpErrors } from 'src/common/exceptions/http-expeptions';
 
 @Controller('obras')
 export class ObrasController {
@@ -23,7 +24,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -35,7 +36,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -47,7 +48,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -59,7 +60,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
   @Get('pedidosCerrados/:obraId')
@@ -70,7 +71,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -83,7 +84,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -95,7 +96,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -108,7 +109,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -120,7 +121,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -131,7 +132,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -146,7 +147,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -157,7 +158,7 @@ export class ObrasController {
       return await firstValueFrom(this.client.send('obras.agregarEtapa', dto))
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -173,20 +174,20 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
-
+  
 
   @Put()
   async modificarObra(@Body() dto: any) {
     try {
-
-      return await firstValueFrom(this.client.send('obras.modificarObra', dto))
+      const data = await firstValueFrom(this.client.send('obras.modificarObra', dto))
+      return data
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -198,7 +199,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -211,7 +212,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -224,7 +225,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -237,7 +238,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -250,7 +251,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -263,7 +264,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -276,7 +277,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -289,7 +290,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -302,7 +303,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -315,7 +316,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -328,7 +329,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -341,7 +342,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -354,7 +355,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -372,7 +373,7 @@ export class ObrasController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -384,7 +385,7 @@ export class ObrasController {
       return await firstValueFrom(this.client.send('obras.inactividadMasiva', dto))
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -396,7 +397,7 @@ export class ObrasController {
       return await firstValueFrom(this.client.send('obras.updateInactividad', { obraId, ...dto }))
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }
@@ -408,7 +409,7 @@ export class ObrasController {
       return await firstValueFrom(this.client.send('obras.updateInactividad', { obraId, inactividadId }))
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
 
     }
   }

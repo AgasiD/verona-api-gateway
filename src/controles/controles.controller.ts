@@ -1,6 +1,7 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Controller, Get, HttpException, Inject, Param } from '@nestjs/common';
 import { ClientProxy, MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { handleHttpErrors } from 'src/common/exceptions/http-expeptions';
 
 import { NATS_SERVICE } from 'src/config/services';
 
@@ -18,7 +19,7 @@ export class ControlesController {
 
     } catch (err) {
 
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -30,7 +31,7 @@ export class ControlesController {
 
     } catch (err) {
 
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 

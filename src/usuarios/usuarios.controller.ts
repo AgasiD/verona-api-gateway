@@ -39,7 +39,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -51,7 +51,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -63,7 +63,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -76,7 +76,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -88,7 +88,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -100,7 +100,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -112,7 +112,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -124,7 +124,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -136,7 +136,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -148,7 +148,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -160,7 +160,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -168,11 +168,11 @@ export class UsuariosController {
   async obtenerNotifificacionesByUser(@Param('usuarioId') usuarioId: string) {
     try {
 
-      return await firstValueFrom(this.client.send('usuarios.profesionales', { usuarioId }))
+      return await firstValueFrom(this.client.send('usuarios.getNotifications', { usuarioId }))
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -184,7 +184,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -196,7 +196,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -208,8 +208,8 @@ export class UsuariosController {
       return await firstValueFrom(this.client.send('usuarios.crearUsuario', dto))
 
     } catch (err) {
-      this. logger.error(err)
-      throw new RpcException(err.message)
+      this.logger.error(err)
+      handleHttpErrors(err)
     }
   }
 
@@ -221,7 +221,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -233,7 +233,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -246,7 +246,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -258,7 +258,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -270,7 +270,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -282,7 +282,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -294,7 +294,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -302,11 +302,11 @@ export class UsuariosController {
   async cambiarPassword(@Body() data: any) {
     try {
 
-      return await firstValueFrom(this.client.send('auth.cambiarPassword', data))
+      return await  (this.client.send('auth.cambiarPassword', data))
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -318,7 +318,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -340,7 +340,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -352,7 +352,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 
@@ -364,7 +364,7 @@ export class UsuariosController {
 
     } catch (err) {
       this.logger.error(err)
-      throw new RpcException(err.message)
+      handleHttpErrors(err)
     }
   }
 

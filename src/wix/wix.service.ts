@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
+import { handleHttpErrors } from 'src/common/exceptions/http-expeptions';
 import { HttpService } from 'src/common/http/http.service';
 import { envs } from 'src/config/envs';
 
@@ -10,9 +11,9 @@ export class WixService {
     constructor(private readonly http: HttpService) {
 
         this.HEADERS = {
-            "Authorization":  envs.WIX_API_KEY,
+            "Authorization": envs.WIX_API_KEY,
             "wix-account-id": envs.WIX_ACC_ID,
-            "wix-site-id":    envs.WIX_SITE_ID
+            "wix-site-id": envs.WIX_SITE_ID
         }
     }
 
@@ -49,9 +50,9 @@ export class WixService {
             let data = await this.getAllPostQuery();
 
             if (data.status > 300) {
-                throw new HttpException(data.statusText, data.status, { description: data.statusText});
+                handleHttpErrors({ message: data.statusText, status: data.status });
             }
-    
+
             return data.data;
 
         } catch (err) {
