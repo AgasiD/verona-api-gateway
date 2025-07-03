@@ -302,7 +302,7 @@ export class UsuariosController {
   async cambiarPassword(@Body() data: any) {
     try {
 
-      return await  (this.client.send('auth.cambiarPassword', data))
+      return await (this.client.send('auth.cambiarPassword', data))
 
     } catch (err) {
       this.logger.error(err)
@@ -327,10 +327,17 @@ export class UsuariosController {
   //   return this.usuariosService.ultimoMensajeLeido(id);
   // }
 
-  // @Put('deleteDevice')
-  // deleteDevice(@Body() data: any) {
-  //   return this.usuariosService.deleteDevice(data); TODO
-  // }
+  @Put('deleteDevice')
+  async deleteDevice(@Body() data: any) {
+    try {
+
+      return await firstValueFrom(this.client.send('usuarios.deleteDevice', data ))
+
+    } catch (err) {
+      this.logger.error(err)
+      handleHttpErrors(err)
+    }
+  }
 
   @Put('update/:usuarioId')
   async modificarUsuario(@Param('usuarioId') usuarioId: string, @Body() data: any) {
