@@ -331,7 +331,11 @@ export class UsuariosController {
   async deleteDevice(@Body() data: any) {
     try {
 
-      return await firstValueFrom(this.client.send('usuarios.deleteDevice', data ))
+       await firstValueFrom(this.client.emit('usuarios.deleteDevice', data ))
+
+       return {
+        success: true
+       }
 
     } catch (err) {
       this.logger.error(err)
