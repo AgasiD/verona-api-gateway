@@ -229,7 +229,10 @@ export class UsuariosController {
   async registrarDispositivo(@Body() body: any) {
     try {
 
-      return await firstValueFrom(this.client.send('usuarios.tokenDevice', body))
+      await firstValueFrom(this.client.emit('usuarios.tokenDevice', body))
+      return {
+        success: true
+      }
 
     } catch (err) {
       this.logger.error(err)
