@@ -338,8 +338,8 @@ export class ObrasController {
   async actualizarOrdenTareas(@Param('obraId') obraId: string, @Body() dto: any) {
     try {
 
-      return await firstValueFrom(this.client.send('obras.actualizarOrdenTareas', { obraId, ...dto }))
-
+      return await firstValueFrom(this.client.send('obras.actualizarOrdenTareas', { obraId, dto }))
+      
     } catch (err) {
       this.logger.error(err)
       handleHttpErrors(err)
