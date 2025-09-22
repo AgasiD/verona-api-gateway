@@ -1,25 +1,32 @@
-# Etapa 1: build
-FROM node:20-alpine as builder
+# ---------- builder ----------
+FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copiamos solo lo necesario para instalar dependencias y compilar
+# 1) Dependencias
 COPY package*.json ./
-COPY tsconfig.json ./
-COPY src ./src
-# COPY .env .env
+RUN npm ci
 
-RUN npm install
+# 2) Config necesaria para el build de Nest
+COPY nest-cli.json ./
+COPY tsconfig.json ./
+COPY tsconfig.build.json ./
+
+# 3) Código + estáticos
+COPY src ./src
+COPY public ./public
+
+# 4) Compilar (esto generará dist/ y dist/public)
 RUN npm run build
 
-# Etapa 2: runtime
-FROM node:20-alpine
+# ---------- runner ----------
+FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Copiamos solo lo necesario para correr la app
-COPY --from=builder /app/dist ./dist
-# COPY --from=builder /app/.env ./env
+# Solo prod deps
 COPY package*.json ./
+RUN npm ci --omit=dev
 
-RUN npm install --only=production
+# Copiá el build ya hecho
+COPY --from=builder /app/dist ./dist
 
 CMD ["node", "dist/main.js"]

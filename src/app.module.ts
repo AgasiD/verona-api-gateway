@@ -11,15 +11,15 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 @Module({
-  
+
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(__dirname, 'public'), // dist/public
     }),
-    ObrasModule, 
+    ObrasModule,
     UsuariosModule, PedidosModule, ControlesModule, InactividadesModule, WixModule, AuthModule, FilesModule,],
-  })
-  export class AppModule {
-    
-  }
-  
+})
+export class AppModule {
+
+}
+
