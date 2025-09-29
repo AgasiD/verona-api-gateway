@@ -115,17 +115,6 @@ export class ObrasController {
 
 
   @Post('/obtenerObra/:obraId')
-  async obtenerObraa(@Param('obraId') obraId: string) {
-    try {
-      return await firstValueFrom(this.client.send('obras.obtenerObra', { obraId }))
-
-    } catch (err) {
-      this.logger.error(err)
-      handleHttpErrors(err)
-    }
-  }
-
-  @Post('/:obraId')
   async obtenerObra(@Param('obraId') obraId: string) {
     try {
       return await firstValueFrom(this.client.send('obras.obtenerObra', { obraId }))
@@ -135,6 +124,17 @@ export class ObrasController {
       handleHttpErrors(err)
     }
   }
+
+  // @Post('/:obraId')
+  // async obtenerObra(@Param('obraId') obraId: string) {
+  //   try {
+  //     return await firstValueFrom(this.client.send('obras.obtenerObra', { obraId }))
+
+  //   } catch (err) {
+  //     this.logger.error(err)
+  //     handleHttpErrors(err)
+  //   }
+  // }
 
   @Get('/controlObra/:obraId')
   async controlObra(@Param('obraId') obraId: string) {
